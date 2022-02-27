@@ -5,7 +5,7 @@ export class FormModel{
         this.name = "";
         this.email = "";
         this.phoneNumber = "";
-        // this.audioMemo = "";
+        this.audioMemo = "";
         this.password = "";
         this.reenterPassword = "";
         this.tncChecked = false;
