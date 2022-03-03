@@ -1,9 +1,9 @@
-import { Button, Divider } from "@mui/material";
-import { Box } from "@mui/system";
-import { ActionButtons } from "components";
-import useRecorder from "hooks/useRecorder";
-import React from "react";
-import styled from "styled-components";
+import { Button, Divider } from '@mui/material';
+import { Box } from '@mui/system';
+import { ActionButtons } from 'components';
+import useRecorder from 'hooks/useRecorder';
+import React from 'react';
+import styled from 'styled-components';
 
 const AudioRecorderWrapper = styled.div`
   padding: 24px;
@@ -71,7 +71,11 @@ export const AudioRecorder = ({ onClose, onSubmit }) => {
         </Button>
       </BodyWrapper>
       <Divider />
-      <ActionButtons onClose={onClose} onSubmit={handleSubmit} />
+      <ActionButtons
+        onClose={onClose}
+        onSubmit={handleSubmit}
+        disabled={isRecording}
+      />
     </AudioRecorderWrapper>
   );
 };

@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 const useRecorder = () => {
-  const [audioURL, setAudioURL] = useState("");
+  const [audioURL, setAudioURL] = useState('');
   const [isRecording, setIsRecording] = useState(false);
   const [recorder, setRecorder] = useState(null);
   const [recorderError, setRecorderError] = useState(null);
@@ -18,14 +18,18 @@ const useRecorder = () => {
       recorder.start();
     } else {
       recorder.stop();
+      // recorder.stream.getTracks().forEach(track => track.stop());
     }
 
-    const handleData = (e) => {
+    const handleData = e => {
       setAudioURL(URL.createObjectURL(e.data));
     };
 
-    recorder.addEventListener("dataavailable", handleData);
-    return () => recorder.removeEventListener("dataavailable", handleData);
+    recorder.addEventListener('dataavailable', handleData);
+    return () => {
+      recorder.removeEventListener('dataavailable', handleData);
+      // recorder.stream.getTracks().forEach(track => track.stop());
+    };
   }, [recorder, isRecording]);
 
   const startRecording = () => {
@@ -39,12 +43,15 @@ const useRecorder = () => {
     setIsRecording(false);
   };
 
-  const handleRecorderSuccess = (success) => {
+  const handleRecorderSuccess = success => {
+    // setInterval(() => {
+    //   console.log(success);
+    // }, 2 * 1000);
     setRecorder(success);
     setRecorderError(null);
   };
 
-  const handleRecorderError = (error) => {
+  const handleRecorderError = error => {
     console.log(error.message);
     setRecorderError(error.message);
   };

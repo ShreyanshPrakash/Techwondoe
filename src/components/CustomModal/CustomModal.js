@@ -1,6 +1,6 @@
-import { Modal } from "@mui/material";
-import React, { Children } from "react";
-import styled from "styled-components";
+import { Modal } from '@mui/material';
+import React from 'react';
+import styled from 'styled-components';
 
 const CustomModalWrapper = styled.div``;
 

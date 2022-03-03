@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import {
   Button,
   Checkbox,
   FormControlLabel,
   IconButton,
-  TextField,
-} from "@mui/material";
-import MicIcon from "@mui/icons-material/Mic";
-import styled from "styled-components";
-import { FormModel } from "models";
-import { isFormDataValid, isEmailValid } from "utils";
-import { AudioRecorder, CustomModal } from "components";
+  TextField
+} from '@mui/material';
+import MicIcon from '@mui/icons-material/Mic';
+import styled from 'styled-components';
+import { FormModel } from 'models';
+import { isFormDataValid, isEmailValid } from 'utils';
+import { AudioRecorder, CustomModal } from 'components';
 
 const AudioMemoWrapper = styled.div`
   margin: 56px 0px;
@@ -56,21 +56,21 @@ export function AudioMemo() {
     Form Methods
   */
 
-  const handleFormChange = (event) => {
-    const { name, value, checked } = event?.target;
+  const handleFormChange = event => {
+    const { name, value, checked } = event?.target || {};
     if (
-      name === "phoneNumber" &&
+      name === 'phoneNumber' &&
       !(value?.length <= 10 && !isNaN(Number(value)))
     ) {
       return;
     }
-    setFormState((state) => ({
+    setFormState(state => ({
       ...state,
-      [name]: name === "tncChecked" ? checked : value,
+      [name]: name === 'tncChecked' ? checked : value
     }));
   };
 
-  const handleOnFormSubmit = (event) => {
+  const handleOnFormSubmit = event => {
     event.preventDefault();
     console.log(formState);
   };
@@ -87,10 +87,10 @@ export function AudioMemo() {
     setOpenModal(false);
   };
 
-  const handleModalSubmit = (audio) => {
-    setFormState((state) => ({
+  const handleModalSubmit = audio => {
+    setFormState(state => ({
       ...state,
-      audioMemo: audio,
+      audioMemo: audio
     }));
     setOpenModal(false);
   };
@@ -127,7 +127,7 @@ export function AudioMemo() {
           size="small"
           className="form-field"
           inputProps={{
-            maxenght: 10,
+            maxenght: 10
           }}
           required
           value={formState?.phoneNumber}
@@ -139,7 +139,7 @@ export function AudioMemo() {
           className="form-field"
           required
           inputProps={{
-            type: "password",
+            type: 'password'
           }}
           value={formState?.password}
         />
@@ -150,7 +150,7 @@ export function AudioMemo() {
           className="form-field"
           required
           inputProps={{
-            type: "password",
+            type: 'password'
           }}
           value={formState?.reenterPassword}
         />
