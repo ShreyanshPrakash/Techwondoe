@@ -11,6 +11,8 @@ import styled from 'styled-components';
 import { FormModel } from 'models';
 import { isFormDataValid, isEmailValid } from 'utils';
 import { AudioRecorder, CustomModal } from 'components';
+import { httpsService } from 'service';
+import { API_ENDPOINTS, APP_CONFIG } from 'config';
 
 const AudioMemoWrapper = styled.div`
   margin: 56px 0px;
@@ -73,6 +75,10 @@ export function AudioMemo() {
   const handleOnFormSubmit = event => {
     event.preventDefault();
     console.log(formState);
+    httpsService
+      .post(API_ENDPOINTS[APP_CONFIG.ENV].saveAudioMemo, formState)
+      .then(res => console.log(res))
+      .catch(error => console.log(error.message));
   };
 
   const handleOnRecord = () => {
@@ -90,7 +96,7 @@ export function AudioMemo() {
   const handleModalSubmit = audio => {
     setFormState(state => ({
       ...state,
-      audioMemo: audio
+      audioMemo: btoa(audio)
     }));
     setOpenModal(false);
   };

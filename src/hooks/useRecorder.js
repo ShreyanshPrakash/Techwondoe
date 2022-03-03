@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 
 const useRecorder = () => {
   const [audioURL, setAudioURL] = useState('');
+  const [audioBlob, setAudioBlob] = useState('');
   const [isRecording, setIsRecording] = useState(false);
   const [recorder, setRecorder] = useState(null);
   const [recorderError, setRecorderError] = useState(null);
@@ -30,6 +31,7 @@ const useRecorder = () => {
 
     const handleData = e => {
       setAudioURL(URL.createObjectURL(e.data));
+      setAudioBlob(e.data);
     };
 
     recorder.addEventListener('dataavailable', handleData);
@@ -59,7 +61,14 @@ const useRecorder = () => {
     setRecorderError(error.message);
   };
 
-  return [audioURL, isRecording, recorderError, startRecording, stopRecording];
+  return [
+    audioURL,
+    audioBlob,
+    isRecording,
+    recorderError,
+    startRecording,
+    stopRecording
+  ];
 };
 
 async function requestRecorder() {

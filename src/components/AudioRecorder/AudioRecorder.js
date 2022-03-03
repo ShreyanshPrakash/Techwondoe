@@ -35,11 +35,17 @@ const ErrorMessage = styled.div`
 `;
 
 export const AudioRecorder = ({ onClose, onSubmit }) => {
-  const [audioURL, isRecording, recorderError, startRecording, stopRecording] =
-    useRecorder();
+  const [
+    audioURL,
+    audioBlob,
+    isRecording,
+    recorderError,
+    startRecording,
+    stopRecording
+  ] = useRecorder();
 
   const handleSubmit = () => {
-    onSubmit(audioURL);
+    onSubmit(audioBlob);
   };
 
   return (
