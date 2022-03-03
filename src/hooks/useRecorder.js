@@ -7,6 +7,14 @@ const useRecorder = () => {
   const [recorderError, setRecorderError] = useState(null);
 
   useEffect(() => {
+    return () => {
+      if (recorder) {
+        recorder.stream.getTracks().forEach(track => track.stop());
+      }
+    };
+  }, [recorder]);
+
+  useEffect(() => {
     if (recorder === null) {
       if (isRecording) {
         requestRecorder().then(handleRecorderSuccess, handleRecorderError);
@@ -18,7 +26,6 @@ const useRecorder = () => {
       recorder.start();
     } else {
       recorder.stop();
-      // recorder.stream.getTracks().forEach(track => track.stop());
     }
 
     const handleData = e => {
@@ -28,7 +35,6 @@ const useRecorder = () => {
     recorder.addEventListener('dataavailable', handleData);
     return () => {
       recorder.removeEventListener('dataavailable', handleData);
-      // recorder.stream.getTracks().forEach(track => track.stop());
     };
   }, [recorder, isRecording]);
 
@@ -44,9 +50,6 @@ const useRecorder = () => {
   };
 
   const handleRecorderSuccess = success => {
-    // setInterval(() => {
-    //   console.log(success);
-    // }, 2 * 1000);
     setRecorder(success);
     setRecorderError(null);
   };

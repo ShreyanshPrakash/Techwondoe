@@ -119,7 +119,6 @@ export function AudioMemo() {
           size="small"
           required
           value={formState?.email}
-          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
         />
         <TextField
           label="Phone Number"
@@ -167,7 +166,7 @@ export function AudioMemo() {
           color="secondary"
           onClick={handleOnRecord}
         >
-          <MicIcon color="secondary" />
+          <MicIcon color={`${formState?.audioMemo ? 'success' : 'error'}`} />
         </IconButton>
         <Button
           className="form-field"
